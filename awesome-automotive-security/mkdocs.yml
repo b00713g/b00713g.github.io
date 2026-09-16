@@ -1,0 +1,67 @@
+site_name: automotive-cybersec-hub
+site_description: A curated learning path for automotive cybersecurity.
+site_url: https://yourusername.github.io/automotive-cybersec-hub/
+repo_url: https://github.com/yourusername/automotive-cybersec-hub
+repo_name: automotive-cybersec-hub
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    scheme: slate
+    primary: pink
+    accent: cyan
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+extra_css:
+  - stylesheets/synthwave.css
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Roadmap: roadmap.md
+  - Knowledge Base:
+    - knowledge-base/index.md
+    - 1. CAN Bus: knowledge-base/01-can.md
+    - 2. Vehicle Networks & Diagnostics: knowledge-base/02-networks-diag.md
+    - 3. Embedded Systems: knowledge-base/03-embedded.md
+    - 4. Firmware Reversing: knowledge-base/04-firmware-re.md
+    - 5. EVSE & EV Charging: knowledge-base/05-evse.md
+    - 6. RF & Wireless: knowledge-base/06-rf.md
+    - 7. Android Automotive: knowledge-base/07-android-auto.md
+    - 8. Hardware Security: knowledge-base/08-hardware-security.md
+  - Resources:
+    - resources/index.md
+    - Tools: resources/tools.md
+    - Talks & Papers: resources/talks-papers.md
+    - CTFs & Challenges: resources/ctfs.md
+  - Contributing: contributing.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/awesome-automotive-security
+  generator: false
+
+copyright: Community-maintained · <a href="contributing/">Contribute</a>
