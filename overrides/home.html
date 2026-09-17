@@ -1,0 +1,166 @@
+{% extends "main.html" %}
+
+{% block tabs %}{% endblock %}
+{% block content %}{% endblock %}
+{% block site_nav %}{% endblock %}
+
+{% block hero %}
+<style>
+.md-main__inner{margin:0;max-width:none;padding:0;}
+.md-content{max-width:none;margin:0;padding:0;}
+.md-sidebar{display:none;}
+.md-header{background:rgba(21,5,52,0.9)!important;backdrop-filter:blur(8px);}
+.md-footer{border-top:1px solid rgba(185,103,255,0.15);}
+
+.outrun-landing{position:relative;width:100%;min-height:100vh;overflow:hidden;
+  background:linear-gradient(180deg,#020010 0%,#0a0025 25%,#1a0040 50%,#2d0060 68%,#1a0040 80%,#0d0221 100%);}
+.stars{position:absolute;top:0;left:0;right:0;height:45%;pointer-events:none;}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s ease-in-out infinite alternate;}
+@keyframes twinkle{0%{opacity:.2}100%{opacity:.9}}
+.outrun-sun{position:absolute;left:50%;transform:translateX(-50%);top:22%;width:240px;height:120px;border-radius:120px 120px 0 0;
+  background:linear-gradient(180deg,#ff2d95 0%,#ff6b35 35%,#fffb96 85%);opacity:.6;animation:sunBreathe 5s ease-in-out infinite;}
+.outrun-sun::after{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:repeating-linear-gradient(0deg,transparent,transparent 5px,rgba(13,2,33,.55) 5px,rgba(13,2,33,.55) 10px);}
+@keyframes sunBreathe{0%,100%{opacity:.5;transform:translateX(-50%) scale(1)}50%{opacity:.7;transform:translateX(-50%) scale(1.03)}}
+.mountains{position:absolute;top:42%;left:0;right:0;height:80px;pointer-events:none;}
+.mountains svg{width:100%;height:100%;}
+.road-scene{position:absolute;top:48%;left:0;right:0;bottom:0;perspective:380px;overflow:hidden;}
+.road-surface{position:absolute;inset:0;background:linear-gradient(180deg,#1a0033,#0d001a);transform:rotateX(52deg);transform-origin:top center;}
+.road-surface::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(rgba(185,103,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(185,103,255,.08) 1px,transparent 1px);
+  background-size:60px 30px;animation:gridFlow 1.5s linear infinite;}
+@keyframes gridFlow{0%{background-position:0 0}100%{background-position:0 30px}}
+.road-asphalt{position:absolute;top:0;bottom:0;left:50%;width:320px;transform:translateX(-50%);
+  background:linear-gradient(180deg,rgba(20,0,40,.9),rgba(10,0,20,.95));
+  border-left:3px solid rgba(255,45,149,.4);border-right:3px solid rgba(0,240,255,.4);}
+.road-dashes{position:absolute;top:0;bottom:0;left:50%;width:4px;transform:translateX(-50%);
+  background:repeating-linear-gradient(180deg,#fffb96 0px,#fffb96 18px,transparent 18px,transparent 40px);
+  opacity:.6;animation:dashFlow .8s linear infinite;}
+@keyframes dashFlow{0%{background-position:0 0}100%{background-position:0 40px}}
+
+.signs-container{position:absolute;top:48%;left:0;right:0;bottom:5%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;pointer-events:none;padding-bottom:2rem;}
+.sign-row{display:flex;justify-content:center;width:100%;pointer-events:auto;margin-bottom:.6rem;}
+.sign-row.left{padding-right:42%;}
+.sign-row.right{padding-left:42%;}
+.street-sign{position:relative;cursor:pointer;pointer-events:auto;transition:transform .25s,filter .25s;text-decoration:none!important;}
+.street-sign:hover{transform:scale(1.08) translateY(-3px);filter:brightness(1.3);}
+.sign-plate{background:linear-gradient(135deg,rgba(20,5,50,.92),rgba(30,10,65,.95));
+  border:2px solid;border-radius:4px;padding:.5rem 1.1rem;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:0 0 12px rgba(0,0,0,.5),inset 0 0 20px rgba(185,103,255,.05);display:flex;align-items:center;gap:.4rem;}
+.sign-plate .num{font-size:.6rem;opacity:.6;font-weight:500;}
+.sign-cyan .sign-plate{border-color:rgba(0,240,255,.5);color:#00f0ff;text-shadow:0 0 8px rgba(0,240,255,.4);}
+.sign-pink .sign-plate{border-color:rgba(255,45,149,.5);color:#ff2d95;text-shadow:0 0 8px rgba(255,45,149,.4);}
+.sign-purple .sign-plate{border-color:rgba(185,103,255,.5);color:#b967ff;text-shadow:0 0 8px rgba(185,103,255,.4);}
+.sign-yellow .sign-plate{border-color:rgba(255,251,150,.4);color:#fffb96;text-shadow:0 0 8px rgba(255,251,150,.3);}
+.sign-post{width:3px;height:22px;margin:0 auto;background:linear-gradient(180deg,rgba(185,103,255,.3),rgba(185,103,255,.08));}
+
+.road-title{position:absolute;top:8%;left:50%;transform:translateX(-50%);z-index:20;text-align:center;}
+.road-title h1{font-size:2.2rem;font-weight:700;letter-spacing:.05em;
+  background:linear-gradient(90deg,#00f0ff,#ff2d95,#b967ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:heroGlow 4s ease-in-out infinite alternate;margin-bottom:.4rem;}
+@keyframes heroGlow{0%{filter:drop-shadow(0 0 12px rgba(0,240,255,.5))}100%{filter:drop-shadow(0 0 20px rgba(255,45,149,.6))}}
+.road-title p{font-size:.82rem;color:#8b7fad;letter-spacing:.05em;}
+.enter-btn{display:inline-block;margin-top:1rem;padding:.55rem 1.8rem;border:2px solid #00f0ff;color:#00f0ff!important;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .25s;background:transparent;text-decoration:none!important;}
+.enter-btn:hover{background:rgba(0,240,255,.1);box-shadow:0 0 20px rgba(0,240,255,.3);}
+
+.credits-section{background:linear-gradient(180deg,#0d0221,#0a0118);padding:3rem 1.5rem 2.5rem;border-top:1px solid rgba(185,103,255,.12);}
+.credits-inner{max-width:900px;margin:0 auto;}
+.credits-title{font-size:1.3rem;font-weight:700;text-align:center;
+  background:linear-gradient(90deg,#00f0ff,#b967ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.credits-sub{text-align:center;color:#8b7fad;font-size:.82rem;margin-bottom:1.5rem;}
+.credits-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.2rem;}
+.credit-card{display:block;background:#1a0a3e;border:1px solid rgba(185,103,255,.12);border-radius:6px;padding:1rem 1.1rem;transition:all .25s;text-decoration:none!important;}
+.credit-card:hover{transform:translateY(-2px);}
+.cc-cyan:hover{border-color:rgba(0,240,255,.3);box-shadow:0 0 16px rgba(0,240,255,.08);}
+.cc-pink:hover{border-color:rgba(255,45,149,.3);box-shadow:0 0 16px rgba(255,45,149,.08);}
+.cc-purple:hover{border-color:rgba(185,103,255,.3);box-shadow:0 0 16px rgba(185,103,255,.08);}
+.cc-yellow:hover{border-color:rgba(255,251,150,.25);box-shadow:0 0 16px rgba(255,251,150,.06);}
+.cc-name{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;margin-bottom:.15rem;}
+.cc-cyan .cc-name{color:#00f0ff}.cc-pink .cc-name{color:#ff2d95}.cc-purple .cc-name{color:#b967ff}.cc-yellow .cc-name{color:#fffb96}
+.cc-handle{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#8b7fad;margin-bottom:.5rem;}
+.cc-desc{font-size:.78rem;color:#e0d6ff;line-height:1.55;opacity:.85;}
+.credits-communities{text-align:center;font-size:.8rem;color:#8b7fad;margin-top:.5rem;}
+.landing-footer{text-align:center;padding:1rem;font-size:.65rem;color:#8b7fad;opacity:.5;}
+@media(max-width:768px){.road-title h1{font-size:1.3rem}.sign-plate{font-size:.6rem;padding:.4rem .7rem}.credits-grid{grid-template-columns:1fr}}
+</style>
+
+<div class="outrun-landing">
+  <div class="stars" id="stars"></div>
+  <div class="outrun-sun"></div>
+  <div class="mountains"><svg viewBox="0 0 1200 80" preserveAspectRatio="none"><polygon points="0,80 0,55 80,30 150,48 220,18 300,42 370,12 440,35 520,8 600,30 680,15 750,38 830,10 900,32 970,20 1040,40 1100,25 1200,50 1200,80" fill="#0d0221"/></svg></div>
+  <div class="road-scene"><div class="road-surface"></div><div class="road-asphalt"></div><div class="road-dashes"></div></div>
+
+  <div class="signs-container">
+    <div class="sign-row left"><a class="street-sign sign-purple" href="knowledge-base/08-hardware-security/"><div class="sign-plate"><span class="num">08</span> Hardware Security</div><div class="sign-post"></div></a></div>
+    <div class="sign-row right"><a class="street-sign sign-purple" href="knowledge-base/07-android-auto/"><div class="sign-plate"><span class="num">07</span> Android Automotive</div><div class="sign-post"></div></a></div>
+    <div class="sign-row left"><a class="street-sign sign-cyan" href="knowledge-base/06-rf/"><div class="sign-plate"><span class="num">06</span> RF & Wireless</div><div class="sign-post"></div></a></div>
+    <div class="sign-row right"><a class="street-sign sign-yellow" href="knowledge-base/05-evse/"><div class="sign-plate"><span class="num">05</span> EVSE & EV Charging</div><div class="sign-post"></div></a></div>
+    <div class="sign-row left"><a class="street-sign sign-pink" href="knowledge-base/04-firmware-re/"><div class="sign-plate"><span class="num">04</span> Firmware Reversing</div><div class="sign-post"></div></a></div>
+    <div class="sign-row right"><a class="street-sign sign-cyan" href="knowledge-base/03-embedded/"><div class="sign-plate"><span class="num">03</span> Embedded Systems</div><div class="sign-post"></div></a></div>
+    <div class="sign-row left"><a class="street-sign sign-pink" href="knowledge-base/02-networks-diag/"><div class="sign-plate"><span class="num">02</span> Networks & Diagnostics</div><div class="sign-post"></div></a></div>
+    <div class="sign-row right"><a class="street-sign sign-cyan" href="knowledge-base/01-can/"><div class="sign-plate"><span class="num">01</span> CAN Bus</div><div class="sign-post"></div></a></div>
+    <div class="sign-row" style="gap:1.2rem;justify-content:center;">
+      <a class="street-sign sign-yellow" href="resources/tools/"><div class="sign-plate">Tools</div><div class="sign-post"></div></a>
+      <a class="street-sign sign-pink" href="roadmap/"><div class="sign-plate" style="font-size:.82rem;padding:.6rem 1.4rem;">⚡ Roadmap</div><div class="sign-post"></div></a>
+      <a class="street-sign sign-yellow" href="resources/ctfs/"><div class="sign-plate">CTFs</div><div class="sign-post"></div></a>
+    </div>
+  </div>
+
+  <div class="road-title">
+    <h1>automotive-cybersec-hub</h1>
+    <p>curated learning path for automotive cybersecurity</p>
+    <a class="enter-btn" href="roadmap/">Enter the Roadmap →</a>
+  </div>
+</div>
+
+<div class="credits-section">
+  <div class="credits-inner">
+    <div class="credits-title">Built on the shoulders of</div>
+    <p class="credits-sub">This resource exists because these people put their knowledge out in the open.</p>
+    <div class="credits-grid">
+      <a href="https://icanhack.nl/" target="_blank" class="credit-card cc-cyan">
+        <div class="cc-name">Willem Melching</div><div class="cc-handle">icanhack.nl</div>
+        <div class="cc-desc">The Knowledge Base on vehicle networks, diagnostics, and automotive RE. This site links to his work constantly because there's no point rewriting what he's already done better.</div>
+      </a>
+      <a href="https://voidstarsec.com/" target="_blank" class="credit-card cc-pink">
+        <div class="cc-name">Matthew Alt / Wrong Baud</div><div class="cc-handle">VoidStar Security</div>
+        <div class="cc-desc">The Embedded Security Roadmap and Wrong Baud's Blog are the definitive open resources for hardware hacking. His Ghidra training through Hackaday U has taught thousands.</div>
+      </a>
+      <a href="https://github.com/polybassa" target="_blank" class="credit-card cc-purple">
+        <div class="cc-name">Nils Weiss</div><div class="cc-handle">Scapy Automotive</div>
+        <div class="cc-desc">Built the Scapy automotive layer — UDS, DoIP, ISO-TP, SOME/IP, HSFZ, GMLAN, XCP plus automated scanners and stateful fuzzers.</div>
+      </a>
+      <a href="https://ost2.fyi/" target="_blank" class="credit-card cc-cyan">
+        <div class="cc-name">Xeno Kovah</div><div class="cc-handle">OpenSecurityTraining2</div>
+        <div class="cc-desc">Founded OST2 — a nonprofit providing the world's deepest free cybersecurity training. Architecture courses are essential for embedded RE at depth.</div>
+      </a>
+      <a href="https://www.newae.com/" target="_blank" class="credit-card cc-yellow">
+        <div class="cc-name">Colin O'Flynn</div><div class="cc-handle">ChipWhisperer</div>
+        <div class="cc-desc">Created ChipWhisperer, making side-channel analysis and fault injection accessible. BAM BAM!! demonstrated EMFI on a real automotive ECU.</div>
+      </a>
+      <a href="https://github.com/FlUxIuS" target="_blank" class="credit-card cc-pink">
+        <div class="cc-name">Sébastien Dudek</div><div class="cc-handle">V2G Injector / HomePlugPWN</div>
+        <div class="cc-desc">Opened up EV charging security as a research field with PLC-layer MITM on ISO 15118.</div>
+      </a>
+      <a href="http://opengarages.org/" target="_blank" class="credit-card cc-purple">
+        <div class="cc-name">Craig Smith</div><div class="cc-handle">Car Hacker's Handbook / ICSim</div>
+        <div class="cc-desc">The first book most people read on automotive security. ICSim is where almost everyone's CAN bus journey starts.</div>
+      </a>
+      <a href="https://samy.pl/" target="_blank" class="credit-card cc-yellow">
+        <div class="cc-name">Samy Kamkar</div><div class="cc-handle">RollJam / OpenSesame</div>
+        <div class="cc-desc">Demonstrated real-world key fob and rolling code vulnerabilities that changed how the industry thinks about physical access.</div>
+      </a>
+    </div>
+    <p class="credits-communities">And the communities: <a href="http://opengarages.org/" target="_blank">Open Garages</a> · <a href="https://www.carhackingvillage.com/" target="_blank">DEF CON Car Hacking Village</a> · <a href="https://www.asrg.io/" target="_blank">ASRG</a></p>
+    <div style="text-align:center;margin-top:1.5rem;"><a class="enter-btn" href="roadmap/">Enter the Roadmap →</a></div>
+  </div>
+</div>
+<div class="landing-footer">publicly available research · education · authorized testing</div>
+
+<script>
+(function(){var s=document.getElementById('stars');for(var i=0;i<80;i++){var d=document.createElement('div');d.className='star';d.style.left=Math.random()*100+'%';d.style.top=Math.random()*100+'%';d.style.animationDelay=Math.random()*3+'s';d.style.width=d.style.height=(Math.random()*2+1)+'px';s.appendChild(d);}})();
+</script>
+{% endblock %}
