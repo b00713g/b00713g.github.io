@@ -1,7 +1,7 @@
 site_name: automotive-cybersec-hub
 site_description: A curated learning path for automotive cybersecurity.
-site_url: https://yourusername.github.io/automotive-cybersec-hub/
-repo_url: https://github.com/yourusername/automotive-cybersec-hub
+site_url: https://b00713g.github.io/automotive-cybersec-hub/
+repo_url: https://github.com/b00713g/automotive-cybersec-hub
 repo_name: automotive-cybersec-hub
 edit_uri: edit/main/docs/
 
@@ -61,7 +61,7 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/yourusername/awesome-automotive-security
+      link: https://github.com/b00713g/automotive-cybersec-hub
   generator: false
 
 copyright: Community-maintained · <a href="contributing/">Contribute</a>
