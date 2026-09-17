@@ -27,6 +27,16 @@
 | [Current Affairs: CCS Charging Security](https://www.usenix.org/system/files/usenixsecurity25-szakaly.pdf) | Szakaly et al. | 2025 |
 | [Security Analysis of Android Automotive](https://www.researchgate.net/publication/340632296) | Pese et al. | 2020 |
 
+## YouTube Channels
+
+| Channel | Focus | Link |
+|---|---|---|
+| Matt Brown (@mattbrwn) | Hardware hacking, IoT pentesting, firmware RE, teardowns — 200K+ subs | [youtube.com/@mattbrwn](https://www.youtube.com/@mattbrwn) |
+| Wrong Baud / VoidStar | Embedded RE, Ghidra, fault injection | [youtube.com/@wrongbaud](https://www.youtube.com/@wrongbaud) |
+| Colin O'Flynn / NewAE | ChipWhisperer, SCA, glitching | [youtube.com/@ColinOFlynn](https://www.youtube.com/@ColinOFlynn) |
+| LiveOverflow | Binary exploitation, hardware hacking | [youtube.com/@LiveOverflow](https://www.youtube.com/@LiveOverflow) |
+| stacksmashing | Hardware hacking, glitching, chip decapping | [youtube.com/@stacksmashing](https://www.youtube.com/@stacksmashing) |
+
 ## Conferences
 
 | Conference | Focus |

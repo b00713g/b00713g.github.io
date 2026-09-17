@@ -20,6 +20,16 @@ AAOS runs natively on head units and has direct access to vehicle signals via th
 - **VehiclePropertyIds** — AAOS exposes powertrain status, HVAC, gear selection, and more to apps.
 - **Third-party app risks** — malicious or vulnerable AAOS apps can leak telemetry or manipulate vehicle state.
 
+## Mobile App & IoT Companion App Testing
+
+These aren't AAOS-specific but the techniques transfer directly to automotive companion apps (Tesla, FordPass, myVW, Rivian, etc.):
+
+- [Intercepting Mobile Application Traffic with Caido and Frida (Matt Brown)](https://brownfinesecurity.com/blog/intercepting-mobile-traffic-with-caido-and-frida) — proxying HTTP traffic from mobile devices
+- [Attacking Enterprise IoT Mobile Apps — Auth Downgrade (Matt Brown)](https://brownfinesecurity.com/blog/attacking-enterprise-iot-mobile-apps) — authentication bypass in companion apps
+- [IoT Security Fail: Missing ONVIF Authentication (Matt Brown)](https://brownfinesecurity.com/blog/iot-vulnerability-basics-onvif-missing-authentication) — remote camera control via missing auth
+- [Intercepting Traffic from Police Bodycam App Sending Data to China (Matt Brown)](https://brownfinesecurity.com/blog/police-bodycam-data-to-china) — TLS certificate validation failure
+- [Intro to Wireshark for IoT Pentesters (Brown Fine Security Training)](https://training.brownfinesecurity.com/l/pdp/intro-to-wireshark-for-iot-pentesters) — IoT-focused Wireshark course
+
 ## Lab
 
 1. Set up the [AAOS emulator](https://developer.android.com/training/cars/testing) in Android Studio

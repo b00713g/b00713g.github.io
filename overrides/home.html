@@ -17,7 +17,7 @@
 .stars{position:absolute;top:0;left:0;right:0;height:45%;pointer-events:none;}
 .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s ease-in-out infinite alternate;}
 @keyframes twinkle{0%{opacity:.2}100%{opacity:.9}}
-.outrun-sun{position:absolute;left:50%;transform:translateX(-50%);top:22%;width:240px;height:120px;border-radius:120px 120px 0 0;
+.outrun-sun{position:absolute;left:50%;transform:translateX(-50%);top:26%;width:240px;height:120px;border-radius:120px 120px 0 0;
   background:linear-gradient(180deg,#ff2d95 0%,#ff6b35 35%,#fffb96 85%);opacity:.6;animation:sunBreathe 5s ease-in-out infinite;}
 .outrun-sun::after{content:'';position:absolute;inset:0;border-radius:inherit;
   background:repeating-linear-gradient(0deg,transparent,transparent 5px,rgba(13,2,33,.55) 5px,rgba(13,2,33,.55) 10px);}
@@ -38,10 +38,12 @@
   opacity:.6;animation:dashFlow .8s linear infinite;}
 @keyframes dashFlow{0%{background-position:0 0}100%{background-position:0 40px}}
 
-.signs-container{position:absolute;top:48%;left:0;right:0;bottom:5%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;pointer-events:none;padding-bottom:2rem;}
-.sign-row{display:flex;justify-content:center;width:100%;pointer-events:auto;margin-bottom:.6rem;}
+.signs-container{position:absolute;top:52%;left:0;right:0;bottom:2%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;pointer-events:none;padding-bottom:1rem;}
+.sign-row{display:flex;justify-content:center;width:100%;pointer-events:auto;margin-bottom:.5rem;}
 .sign-row.left{padding-right:42%;}
 .sign-row.right{padding-left:42%;}
+/* Bottom row (Tools/Roadmap/CTFs) gets extra top spacing to separate from chapter signs */
+.sign-row.bottom-row{margin-top:.4rem;}
 .street-sign{position:relative;cursor:pointer;pointer-events:auto;transition:transform .25s,filter .25s;text-decoration:none!important;}
 .street-sign:hover{transform:scale(1.08) translateY(-3px);filter:brightness(1.3);}
 .sign-plate{background:linear-gradient(135deg,rgba(20,5,50,.92),rgba(30,10,65,.95));
@@ -55,15 +57,15 @@
 .sign-yellow .sign-plate{border-color:rgba(255,251,150,.4);color:#fffb96;text-shadow:0 0 8px rgba(255,251,150,.3);}
 .sign-post{width:3px;height:22px;margin:0 auto;background:linear-gradient(180deg,rgba(185,103,255,.3),rgba(185,103,255,.08));}
 
-.road-title{position:absolute;top:8%;left:50%;transform:translateX(-50%);z-index:20;text-align:center;}
+.road-title{position:absolute;top:4%;left:50%;transform:translateX(-50%);z-index:20;text-align:center;width:90%;max-width:600px;}
 .road-title h1{font-size:2.2rem;font-weight:700;letter-spacing:.05em;
   background:linear-gradient(90deg,#00f0ff,#ff2d95,#b967ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:heroGlow 4s ease-in-out infinite alternate;margin-bottom:.4rem;}
+  animation:heroGlow 4s ease-in-out infinite alternate;margin-bottom:.3rem;}
 @keyframes heroGlow{0%{filter:drop-shadow(0 0 12px rgba(0,240,255,.5))}100%{filter:drop-shadow(0 0 20px rgba(255,45,149,.6))}}
-.road-title p{font-size:.82rem;color:#8b7fad;letter-spacing:.05em;}
-.enter-btn{display:inline-block;margin-top:1rem;padding:.55rem 1.8rem;border:2px solid #00f0ff;color:#00f0ff!important;border-radius:4px;
+.road-title p{font-size:.82rem;color:#8b7fad;letter-spacing:.05em;margin-bottom:.6rem;}
+.enter-btn{display:inline-block;padding:.55rem 1.8rem;border:2px solid #00f0ff;color:#00f0ff!important;border-radius:4px;
   font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;transition:all .25s;background:transparent;text-decoration:none!important;}
+  cursor:pointer;transition:all .25s;background:rgba(13,2,33,0.7);text-decoration:none!important;backdrop-filter:blur(4px);}
 .enter-btn:hover{background:rgba(0,240,255,.1);box-shadow:0 0 20px rgba(0,240,255,.3);}
 
 .credits-section{background:linear-gradient(180deg,#0d0221,#0a0118);padding:3rem 1.5rem 2.5rem;border-top:1px solid rgba(185,103,255,.12);}
@@ -84,7 +86,7 @@
 .cc-desc{font-size:.78rem;color:#e0d6ff;line-height:1.55;opacity:.85;}
 .credits-communities{text-align:center;font-size:.8rem;color:#8b7fad;margin-top:.5rem;}
 .landing-footer{text-align:center;padding:1rem;font-size:.65rem;color:#8b7fad;opacity:.5;}
-@media(max-width:768px){.road-title h1{font-size:1.3rem}.sign-plate{font-size:.6rem;padding:.4rem .7rem}.credits-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.road-title h1{font-size:1.3rem}.road-title{top:2%}.sign-plate{font-size:.55rem;padding:.35rem .6rem}.signs-container{top:48%}.credits-grid{grid-template-columns:1fr}.sign-row.left{padding-right:35%}.sign-row.right{padding-left:35%}}
 </style>
 
 <div class="outrun-landing">
@@ -102,7 +104,7 @@
     <div class="sign-row right"><a class="street-sign sign-cyan" href="knowledge-base/03-embedded/"><div class="sign-plate"><span class="num">03</span> Embedded Systems</div><div class="sign-post"></div></a></div>
     <div class="sign-row left"><a class="street-sign sign-pink" href="knowledge-base/02-networks-diag/"><div class="sign-plate"><span class="num">02</span> Networks & Diagnostics</div><div class="sign-post"></div></a></div>
     <div class="sign-row right"><a class="street-sign sign-cyan" href="knowledge-base/01-can/"><div class="sign-plate"><span class="num">01</span> CAN Bus</div><div class="sign-post"></div></a></div>
-    <div class="sign-row" style="gap:1.2rem;justify-content:center;">
+    <div class="sign-row bottom-row" style="gap:1.2rem;justify-content:center;">
       <a class="street-sign sign-yellow" href="resources/tools/"><div class="sign-plate">Tools</div><div class="sign-post"></div></a>
       <a class="street-sign sign-pink" href="roadmap/"><div class="sign-plate" style="font-size:.82rem;padding:.6rem 1.4rem;">⚡ Roadmap</div><div class="sign-post"></div></a>
       <a class="street-sign sign-yellow" href="resources/ctfs/"><div class="sign-plate">CTFs</div><div class="sign-post"></div></a>
@@ -152,6 +154,10 @@
       <a href="https://samy.pl/" target="_blank" class="credit-card cc-yellow">
         <div class="cc-name">Samy Kamkar</div><div class="cc-handle">RollJam / OpenSesame</div>
         <div class="cc-desc">Demonstrated real-world key fob and rolling code vulnerabilities that changed how the industry thinks about physical access.</div>
+      </a>
+      <a href="https://brownfinesecurity.com/" target="_blank" class="credit-card cc-cyan">
+        <div class="cc-name">Matt Brown</div><div class="cc-handle">Brown Fine Security / @mattbrwn</div>
+        <div class="cc-desc">200K+ subscriber YouTube channel — the largest active hardware hacking channel. IoT pentesting walkthroughs, firmware RE, UART exploitation, and free training that bridges software pentesting to hardware.</div>
       </a>
     </div>
     <p class="credits-communities">And the communities: <a href="http://opengarages.org/" target="_blank">Open Garages</a> · <a href="https://www.carhackingvillage.com/" target="_blank">DEF CON Car Hacking Village</a> · <a href="https://www.asrg.io/" target="_blank">ASRG</a></p>

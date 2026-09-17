@@ -53,6 +53,12 @@ Found in: GM, Ford, Stellantis petrol ECUs, Scania, MAN, Cummins truck ECUs, Del
 
 ### Supporting fundamentals
 
+- [Matt Brown (Brown Fine Security) — YouTube](https://www.youtube.com/@mattbrwn) — 200K+ subscribers, largest active hardware hacking channel. Teardowns, UART exploitation, firmware extraction, logic analysis walkthroughs
+- [All About UART (Brown Fine Security Training)](https://training.brownfinesecurity.com/l/pdp/all-about-uart) — **free course** covering UART from voltage level to exploitation, includes multimeter, logic analyzer, and soldering basics
+- [A Beginner's Guide to Hardware Hacking Tools (Matt Brown)](https://brownfinesecurity.com/blog/hardware-hacking-tools-beginners-guide) — prioritized buying guide for getting started
+- [IoT Pentesting Basics: Root Shell via UART Exploitation (Matt Brown)](https://brownfinesecurity.com/blog/iot-pentesting-basics-uart-root-shells) — UART enumeration and exploitation walkthrough
+- [Digital Signal Analysis for Hardware Hackers (paid)](https://training.brownfinesecurity.com/l/pdp/digital-signal-analysis-for-hardware-hackers) — hands-on UART/SPI/I2C signal capture with logic analyzers on real hardware
+- [Beginner's Guide to IoT and Hardware Hacking (paid)](https://training.brownfinesecurity.com/l/pdp/beginner-s-guide-to-iot-and-hardware-hacking) — bridging software pentesting skills to hardware/IoT
 - [Demystifying Bitwise Operations](https://www.andreinc.net/2023/02/01/demystifying-bitwise-ops) — register manipulation and protocol parsing
 - [Makefile Tutorial by Example](https://makefiletutorial.com/) — most embedded projects use Make
 - [Programming FTDI Devices in Python](https://iosoft.blog/2018/12/02/ftdi-python-part-1/) — FTDI chips are in every debug adapter

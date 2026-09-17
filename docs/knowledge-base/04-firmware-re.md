@@ -13,6 +13,17 @@ Going from "I have a binary blob" to "I found a command injection in the OTA han
 - [Wrong Baud — Ghidra Training (Hackaday U)](https://wrongbaud.github.io/posts/ghidra-training/) — four-session video course
 - [Wrong Baud — Writing a Ghidra Loader: STM32 Edition](https://wrongbaud.github.io/posts/writing-a-ghidra-loader/)
 
+### IoT Firmware RE Walkthroughs (Matt Brown / Brown Fine Security)
+
+Real-world IoT firmware teardowns — the methodology transfers directly to automotive embedded targets:
+
+- [Firmware Extraction and Analysis of Uniview Camera](https://brownfinesecurity.com/blog/firmware-extraction-and-analysis-of-uniview-camera) — searching firmware for hardcoded secrets
+- [Bypassing Restricted Shell on Uniview Security Camera](https://brownfinesecurity.com/blog/bypassing-restricted-shell-on-uniview-security-camera) — unlocked bootloader to root shell
+- [Reverse Engineering Hanwha Camera Firmware Decryption with IDA Pro](https://brownfinesecurity.com/blog/hanwha-firmware-file-decryption) — encrypted firmware file analysis
+- [Uncovering Hardcoded Root Password in VStarcam CB73](https://brownfinesecurity.com/blog/vstarcam-cb73-hardcoded-root-password) — firmware extraction and credential recovery
+- [Proprietary Encryption Protocol Analysis in VStarcam CB73](https://brownfinesecurity.com/blog/vstarcam-cb73-proprietary-encryption-analysis) — crypto flaws in UDP P2P protocol
+- [An IoT Pentesting Roadmap (Matt Brown)](https://brownfinesecurity.com/blog/iot-pentesting-roadmap) — structured methodology for full IoT assessments
+
 ## Suggested order
 
 1. **binwalk** on practice firmware — download router firmware, extract filesystems, find binaries
