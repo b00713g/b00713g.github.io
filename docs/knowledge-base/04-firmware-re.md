@@ -2,6 +2,55 @@
 
 Going from "I have a binary blob" to "I found a command injection in the OTA handler."
 
+## Try it first
+
+### Extract a firmware image with binwalk
+
+```bash
+# Download any router/IoT firmware update from a vendor's support page
+# (Netgear, TP-Link, D-Link all host firmware ZIPs publicly)
+
+wget https://example-vendor.com/firmware-v2.1.bin
+
+# Scan it
+binwalk firmware-v2.1.bin
+
+# Extract everything
+binwalk -e firmware-v2.1.bin
+cd _firmware-v2.1.bin.extracted/squashfs-root/
+
+# Hunt for low-hanging fruit
+grep -r "password" etc/
+grep -r "api_key\|secret\|token" etc/ usr/
+cat etc/shadow               # password hashes
+find . -name "*.pem" -o -name "*.key"  # TLS private keys
+strings usr/bin/httpd | grep -i "admin\|root\|debug"
+```
+
+**What you're looking for:** hardcoded credentials, debug endpoints left in production, private keys shipped in firmware, default password hashes you can crack.
+
+### Load a bare-metal binary in Ghidra
+
+When firmware doesn't have an ELF header (common for ECUs), you need to tell Ghidra what it is:
+
+```
+1. File → Import File → select your .bin dump
+2. Language: ARM:LE:32:Cortex  (or TriCore, PowerPC:BE:32:e200, etc.)
+3. Options → Base Address: 0x08000000  (STM32 flash base)
+   For TriCore: 0xA0000000  (PFlash base)
+   For PPC MPC5xxx: 0x00000000
+
+4. After import: Analysis → Auto Analyze (accept defaults)
+5. Go to the entry point (usually the reset vector at base+0x04)
+6. Press 'D' to disassemble, 'F' to create a function
+7. Window → Defined Strings — find every readable string
+8. Cross-reference from strings back to the functions that use them
+```
+
+**What you're looking for:** string cross-refs lead you to UDS handlers, diagnostic routines, calibration access, and authentication checks. "Access Denied" → find the function → find the check → find the bypass.
+
+---
+
 ## Read first
 
 - [icanhack.nl — ECU Flashing](https://icanhack.nl/knowledge-base/reverse-engineering/ecu-flashing/)

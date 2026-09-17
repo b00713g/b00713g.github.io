@@ -2,6 +2,45 @@
 
 Side-channel analysis, fault injection, secure boot bypass on automotive ECUs.
 
+## Try it first
+
+### ChipWhisperer — See a password check in the power trace
+
+Side-channel analysis means measuring the physical behavior of a chip (power consumption, EM emissions, timing) to extract secrets. This example shows how a simple `strcmp` leaks each character through power spikes:
+
+```python
+# Requires: ChipWhisperer Nano ($50) + target board
+import chipwhisperer as cw
+
+scope = cw.scope()
+target = cw.target(scope)
+scope.default_setup()
+
+# The target runs: if (strcmp(input, "correct_pw")) ...
+# Each character comparison draws a measurably different amount of power
+
+# Send a test password and capture the power trace
+target.simpleserial_write('p', bytearray(b'aaaaaaaaaa'))
+scope.arm()
+target.simpleserial_read('r', timeout=1000)
+trace = scope.get_last_trace()
+
+# Plot it — you'll see a distinct spike for each character
+import matplotlib.pyplot as plt
+plt.plot(trace)
+plt.title("Power trace during strcmp — each spike = 1 char compared")
+plt.show()
+
+# Correct first char = different spike count than wrong first char
+# Iterate: try 'a', 'b', 'c'... for position 0
+# The trace that has one MORE comparison spike = correct character
+# Repeat for each position = full password recovery
+```
+
+**What you're seeing:** the chip's power consumption literally leaks whether each byte of your guess was correct. This is Simple Power Analysis (SPA). The ChipWhisperer Jupyter notebooks walk you through this and then escalate to Differential Power Analysis (DPA) against AES — where you extract the encryption key from thousands of traces.
+
+---
+
 ## Read first
 
 - [icanhack.nl — Fault Injection](https://icanhack.nl/knowledge-base/existing-research/fault-injection/)

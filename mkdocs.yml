@@ -43,6 +43,7 @@ nav:
   - Roadmap: roadmap.md
   - Knowledge Base:
     - knowledge-base/index.md
+    - 0. Lab Setup: knowledge-base/00-lab-setup.md
     - 1. CAN Bus: knowledge-base/01-can.md
     - 2. Vehicle Networks & Diagnostics: knowledge-base/02-networks-diag.md
     - 3. Embedded Systems: knowledge-base/03-embedded.md

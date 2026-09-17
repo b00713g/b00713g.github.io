@@ -2,6 +2,144 @@
 
 An ECU is an embedded system with a CAN transceiver. To find real vulnerabilities you need to think at the register and instruction level.
 
+## Try it first
+
+These are the three most common ways into an embedded target. Once you've done each once, you'll recognize the patterns on any device.
+
+### UART — Get a root shell
+
+UART is the serial console most embedded devices expose on the PCB. If you find TX/RX pins and the shell isn't locked down, you're root.
+
+```bash
+# Step 1: Find the UART pins on the PCB
+# Look for 4 unpopulated pads in a row: VCC, TX, RX, GND
+# Use a multimeter:
+#   GND = 0V (continuity to ground plane)
+#   VCC = 3.3V or 5V (steady)
+#   TX  = fluctuating voltage (data being sent)
+#   RX  = steady high or floating (waiting for input)
+
+# Step 2: Connect your USB-UART adapter (Tigard, CP2102, or FTDI)
+#   Adapter TX  →  Device RX
+#   Adapter RX  →  Device TX
+#   Adapter GND →  Device GND
+#   (do NOT connect VCC unless you know what you're doing)
+
+# Step 3: Find the baud rate and connect
+# Common automotive baud rates: 115200, 57600, 38400, 9600
+
+# Try the most common first:
+screen /dev/ttyUSB0 115200
+
+# Or use baudrate.py to auto-detect:
+# pip install baudrate
+# baudrate -p /dev/ttyUSB0
+```
+
+```
+# What you'll see if it works:
+U-Boot 2019.07 (Oct 14 2020)
+...
+Hit any key to stop autoboot: 0
+=>                              # <-- bootloader shell!
+
+# Or after boot:
+login: root
+Password:                       # <-- blank password? you're in
+root@device:~#
+```
+
+**What you're looking for:** bootloader shell access (can dump flash, change boot args), root login without password, kernel boot logs leaking partition layout and debug info.
+
+### SPI Flash — Dump the firmware
+
+Most embedded devices store firmware on a SPI NOR flash chip (W25Q, MX25L, AT25SF — usually an 8-pin SOIC near the main processor). You can read the entire contents without even powering the device.
+
+```bash
+# Step 1: Identify the flash chip
+# Read the markings on the 8-pin chip (e.g., W25Q128, MX25L6406E)
+
+# Step 2: Connect with a clip or solder wires
+# SOIC-8 test clip (~$5) snaps right onto the chip
+# Connect to Tigard, Bus Pirate, or a CH341A programmer (~$5)
+#
+# CH341A pinout to SPI flash:
+#   CS   →  pin 1
+#   MISO →  pin 2
+#   MOSI →  pin 5
+#   CLK  →  pin 6
+#   GND  →  pin 4
+#   VCC  →  pin 8
+
+# Step 3: Read the flash with flashrom
+sudo apt install flashrom
+flashrom -p ch341a_spi -r firmware_dump.bin
+
+# Verify — read twice and compare (noisy connections = bad dumps)
+flashrom -p ch341a_spi -r firmware_dump2.bin
+md5sum firmware_dump.bin firmware_dump2.bin
+# If hashes match, your dump is clean
+
+# Step 4: Extract the filesystem
+binwalk -e firmware_dump.bin
+ls _firmware_dump.bin.extracted/
+# You'll typically find: squashfs-root/, kernel, bootloader
+```
+
+```
+# Example binwalk output:
+DECIMAL       HEXADECIMAL     DESCRIPTION
+0             0x0             uBoot header, image name: "U-Boot 2019"
+65536         0x10000         uBoot environment
+262144        0x40000         uImage header, Linux kernel
+2097152       0x200000        Squashfs filesystem, little endian
+```
+
+**What you're looking for:** extracted filesystem with `/etc/shadow` (password hashes), hardcoded keys in config files, web server source code, debug binaries left on the image.
+
+### JTAG/SWD — Debug a running processor
+
+JTAG and SWD are the interfaces chip manufacturers use for debugging. If the debug port isn't disabled, you can halt the CPU, read all memory, and single-step through code.
+
+```bash
+# Step 1: Identify JTAG/SWD pins on the PCB
+# Look for: 10-pin or 20-pin headers, or unpopulated pads
+# labeled TCK, TMS, TDI, TDO (JTAG) or SWCLK, SWDIO (SWD)
+# Use JTAGulator or manual probing to identify pins
+
+# Step 2: Connect your debug probe
+# J-Link EDU, Tigard, or ST-Link V2 (~$5 clone)
+# For SWD (ARM Cortex-M — most common in automotive):
+#   Probe SWCLK → Target SWCLK
+#   Probe SWDIO → Target SWDIO
+#   Probe GND   → Target GND
+
+# Step 3: Connect with OpenOCD
+cat > openocd.cfg << 'EOF'
+source [find interface/jlink.cfg]
+transport select swd
+source [find target/stm32f4x.cfg]
+EOF
+
+openocd -f openocd.cfg
+# In another terminal:
+gdb-multiarch
+(gdb) target remote :3333
+(gdb) monitor halt
+(gdb) monitor flash banks     # list flash regions
+(gdb) dump binary memory firmware.bin 0x08000000 0x08100000
+
+# Or with J-Link Commander directly:
+JLinkExe -device STM32F407VG -if SWD -speed 4000
+J-Link> connect
+J-Link> halt
+J-Link> savebin dump.bin 0x08000000 0x100000
+```
+
+**What you're looking for:** full firmware dump even when SPI isn't accessible, ability to set breakpoints on crypto functions or auth checks, read-out protection (RDP) level — if it's Level 0, you just dumped everything.
+
+---
+
 ## Read first
 
 - [Azeria Labs — ARM Assembly Basics](https://azeria-labs.com/writing-arm-assembly-part-1/) — the best free ARM intro, do all 7 parts

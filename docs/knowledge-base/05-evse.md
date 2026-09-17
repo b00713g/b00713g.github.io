@@ -2,6 +2,64 @@
 
 EV chargers are networked embedded systems with their own attack surface. They connect to vehicles via PLC and to backend systems via OCPP.
 
+## Try it first
+
+### Intercept OCPP traffic between charger and backend
+
+OCPP runs over WebSockets, usually unencrypted on port 80 internally. This shows what the protocol looks like:
+
+```python
+import asyncio
+import websockets
+from ocpp.v201 import ChargePoint as CP, call
+
+# Simulate a charger connecting to a backend
+async def main():
+    async with websockets.connect(
+        "ws://localhost:9000/CP_001",  # SteVe OCPP server
+        subprotocols=["ocpp2.0.1"]
+    ) as ws:
+        cp = CP("CP_001", ws)
+
+        # Boot notification — charger announces itself
+        response = await cp.call(call.BootNotification(
+            charging_station={"model": "Test", "vendor_name": "Lab"},
+            reason="PowerUp"
+        ))
+        print(f"Backend says: {response.status}")
+        # status = "Accepted" — backend trusts us
+
+        # Now we can send any OCPP command:
+        # StartTransaction, StopTransaction, FirmwareUpdate,
+        # Reset, SetVariables, GetBaseReport...
+```
+
+**What you're seeing:** OCPP backends often accept any charger that connects with a valid station ID. No mutual TLS, no authentication token. An attacker on the network can impersonate a charger, trigger firmware updates, or manipulate billing.
+
+### Decode V2G messages in Wireshark
+
+```bash
+# Install dsV2Gshark (Wireshark ISO 15118 dissector)
+cd ~/labs/dsV2Gshark
+# Follow the README to copy the plugin to Wireshark's plugin dir
+
+# Open a sample PCAP (dsV2Gshark ships with test captures)
+wireshark samples/v2g_session.pcapng
+
+# Filter: v2g
+# You'll see the ISO 15118 handshake:
+#   1. SDP (SECC Discovery Protocol) — EV finds the charger
+#   2. SessionSetup — establish a session
+#   3. ServiceDiscovery — what charging modes are available
+#   4. PaymentServiceSelection — Plug & Charge or EIM
+#   5. Authorization — TLS client cert or external auth
+#   6. ChargeParameterDiscovery → ChargingStatus → PowerDelivery
+```
+
+**What you're seeing:** the full ISO 15118 session from plug-in to power delivery. The interesting attack surface is in steps 3–5 where authentication happens (or doesn't).
+
+---
+
 ## Read first
 
 - [icanhack.nl — EV Charging Research](https://icanhack.nl/knowledge-base/existing-research/ev-charging/)
