@@ -57,16 +57,31 @@
 .sign-yellow .sign-plate{border-color:rgba(255,251,150,.4);color:#fffb96;text-shadow:0 0 8px rgba(255,251,150,.3);}
 .sign-post{width:2px;height:14px;margin:0 auto;background:linear-gradient(180deg,rgba(185,103,255,.3),rgba(185,103,255,.08));}
 
-.road-title{position:absolute;top:2%;left:50%;transform:translateX(-50%);z-index:20;text-align:center;width:90%;max-width:600px;}
+.road-title{position:absolute;top:1%;left:50%;transform:translateX(-50%);z-index:20;text-align:center;width:92%;max-width:640px;}
 .road-title h1{font-size:2rem;font-weight:700;letter-spacing:.05em;
   background:linear-gradient(90deg,#00f0ff,#ff2d95,#b967ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:heroGlow 4s ease-in-out infinite alternate;margin-bottom:.2rem;line-height:1.2;}
+  animation:heroGlow 4s ease-in-out infinite alternate;margin-bottom:.15rem;line-height:1.2;}
 @keyframes heroGlow{0%{filter:drop-shadow(0 0 12px rgba(0,240,255,.5))}100%{filter:drop-shadow(0 0 20px rgba(255,45,149,.6))}}
-.road-title p{font-size:.78rem;color:#8b7fad;letter-spacing:.05em;margin-bottom:.5rem;}
+.road-title .intro{font-size:.68rem;color:#8b7fad;letter-spacing:.02em;margin-bottom:.5rem;line-height:1.55;max-width:540px;margin-left:auto;margin-right:auto;}
+.road-title .intro .handle{color:#00f0ff;font-family:'JetBrains Mono',monospace;font-weight:600;}
 .enter-btn{display:inline-block;padding:.45rem 1.5rem;border:2px solid #00f0ff;color:#00f0ff!important;border-radius:4px;
   font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   cursor:pointer;transition:all .25s;background:rgba(13,2,33,0.8);text-decoration:none!important;backdrop-filter:blur(4px);}
 .enter-btn:hover{background:rgba(0,240,255,.1);box-shadow:0 0 20px rgba(0,240,255,.3);}
+
+/* ── Social links ── */
+.social-float{position:fixed;right:1rem;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:.6rem;}
+.social-float a{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;
+  background:rgba(21,5,52,0.85);border:1px solid rgba(185,103,255,0.2);color:#8b7fad;
+  transition:all .25s;backdrop-filter:blur(4px);text-decoration:none!important;}
+.social-float a:hover{color:#00f0ff;border-color:rgba(0,240,255,.4);box-shadow:0 0 12px rgba(0,240,255,.15);transform:scale(1.1);}
+.social-float a svg{width:18px;height:18px;fill:currentColor;}
+.social-bar{display:flex;justify-content:center;gap:1rem;margin-top:1rem;}
+.social-bar a{display:flex;align-items:center;gap:.4rem;color:#8b7fad;font-size:.72rem;font-family:'JetBrains Mono',monospace;
+  padding:.35rem .7rem;border:1px solid rgba(185,103,255,.15);border-radius:4px;
+  transition:all .25s;text-decoration:none!important;background:rgba(21,5,52,0.5);}
+.social-bar a:hover{color:#00f0ff;border-color:rgba(0,240,255,.35);}
+.social-bar a svg{width:15px;height:15px;fill:currentColor;flex-shrink:0;}
 
 .credits-section{background:linear-gradient(180deg,#0d0221,#0a0118);padding:3rem 1.5rem 2.5rem;border-top:1px solid rgba(185,103,255,.12);}
 .credits-inner{max-width:900px;margin:0 auto;}
@@ -86,7 +101,7 @@
 .cc-desc{font-size:.78rem;color:#e0d6ff;line-height:1.55;opacity:.85;}
 .credits-communities{text-align:center;font-size:.8rem;color:#8b7fad;margin-top:.5rem;}
 .landing-footer{text-align:center;padding:1rem;font-size:.65rem;color:#8b7fad;opacity:.5;}
-@media(max-width:768px){.road-title h1{font-size:1.2rem}.road-title{top:1%}.road-title p{font-size:.7rem}.sign-plate{font-size:.5rem;padding:.25rem .5rem}.signs-container{top:55%}.credits-grid{grid-template-columns:1fr}.sign-row.left{padding-right:30%}.sign-row.right{padding-left:30%}.sign-row{margin-bottom:.25rem}.sign-post{height:8px}}
+@media(max-width:768px){.road-title h1{font-size:1.2rem}.road-title{top:1%}.road-title .intro{font-size:.6rem;line-height:1.4}.sign-plate{font-size:.5rem;padding:.25rem .5rem}.signs-container{top:55%}.credits-grid{grid-template-columns:1fr}.sign-row.left{padding-right:30%}.sign-row.right{padding-left:30%}.sign-row{margin-bottom:.25rem}.sign-post{height:8px}.social-float{right:.5rem;gap:.4rem}.social-float a{width:30px;height:30px}.social-float a svg{width:14px;height:14px}.social-bar{flex-wrap:wrap;gap:.5rem}.social-bar a{font-size:.65rem;padding:.3rem .5rem}}
 </style>
 
 <div class="outrun-landing">
@@ -114,8 +129,24 @@
 
   <div class="road-title">
     <h1>automotive-cybersec-hub</h1>
-    <p>curated learning path for automotive cybersecurity</p>
+    <div class="intro">Welcome — I'm <span class="handle">7im3Crisys</span>, and I've been in automotive cybersecurity since 2015. I've watched this industry evolve from niche research into a critical discipline, and I've done my best to keep up with the latest tools, research, talks, and trainings along the way. This is the resource I wish existed when I was coming up — a curated learning path to help you gain expertise and find what interests you most. Built with contributions from noteworthy community professionals.</div>
     <a class="enter-btn" href="roadmap/">Enter the Roadmap →</a>
+  </div>
+
+  <!-- Floating social icons (right side) -->
+  <div class="social-float">
+    <a href="https://linkedin.com/in/PLACEHOLDER" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://github.com/b00713g" target="_blank" title="GitHub">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    </a>
+    <a href="https://infosec.exchange/@7im3Crisys" target="_blank" title="Mastodon">
+      <svg viewBox="0 0 24 24"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 00.023-.043v-1.809a.052.052 0 00-.02-.041.053.053 0 00-.046-.01 20.282 20.282 0 01-4.709.547c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 01-.319-1.433.053.053 0 01.066-.054 19.648 19.648 0 004.581.536h.427c1.606-.007 3.212-.138 4.796-.398 .048-.008.095-.018.142-.024 2.334-.42 4.554-1.741 4.783-5.146.009-.134.028-.67.028-.67 0-2.092.089-4.485-.076-6.156z M19.903 13.39h-2.64v-5.63c0-1.184-.498-1.786-1.494-1.786-1.1 0-1.652.713-1.652 2.123v3.076h-2.627V8.097c0-1.41-.553-2.123-1.652-2.123-.996 0-1.494.602-1.494 1.786v5.63H5.704V7.875c0-1.184.302-2.127.907-2.826.625-.7 1.443-1.058 2.46-1.058 1.177 0 2.069.452 2.674 1.357l.576.967.576-.967c.605-.905 1.497-1.357 2.674-1.357 1.017 0 1.835.359 2.46 1.058.605.7.907 1.642.907 2.826v5.515z"/></svg>
+    </a>
+    <a href="https://discord.gg/carhackingvillage" target="_blank" title="Car Hacking Village Discord">
+      <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+    </a>
   </div>
 </div>
 
@@ -163,6 +194,24 @@
     </div>
     <p class="credits-communities">And the communities: <a href="http://opengarages.org/" target="_blank">Open Garages</a> · <a href="https://www.carhackingvillage.com/" target="_blank">DEF CON Car Hacking Village</a> · <a href="https://www.asrg.io/" target="_blank">ASRG</a></p>
     <div style="text-align:center;margin-top:1.5rem;"><a class="enter-btn" href="roadmap/">Enter the Roadmap →</a></div>
+    <div class="social-bar">
+      <a href="https://linkedin.com/in/PLACEHOLDER" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/b00713g" target="_blank">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <a href="https://infosec.exchange/@7im3Crisys" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 00.023-.043v-1.809a.052.052 0 00-.02-.041.053.053 0 00-.046-.01 20.282 20.282 0 01-4.709.547c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 01-.319-1.433.053.053 0 01.066-.054 19.648 19.648 0 004.581.536h.427c1.606-.007 3.212-.138 4.796-.398 .048-.008.095-.018.142-.024 2.334-.42 4.554-1.741 4.783-5.146.009-.134.028-.67.028-.67 0-2.092.089-4.485-.076-6.156z M19.903 13.39h-2.64v-5.63c0-1.184-.498-1.786-1.494-1.786-1.1 0-1.652.713-1.652 2.123v3.076h-2.627V8.097c0-1.41-.553-2.123-1.652-2.123-.996 0-1.494.602-1.494 1.786v5.63H5.704V7.875c0-1.184.302-2.127.907-2.826.625-.7 1.443-1.058 2.46-1.058 1.177 0 2.069.452 2.674 1.357l.576.967.576-.967c.605-.905 1.497-1.357 2.674-1.357 1.017 0 1.835.359 2.46 1.058.605.7.907 1.642.907 2.826v5.515z"/></svg>
+        Mastodon
+      </a>
+      <a href="https://discord.gg/carhackingvillage" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+        CHV Discord
+      </a>
+    </div>
   </div>
 </div>
 <div class="landing-footer">publicly available research · education · authorized testing</div>
