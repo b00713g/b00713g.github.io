@@ -2,13 +2,15 @@
 
 {% block tabs %}{% endblock %}
 {% block content %}{% endblock %}
-{% block site_nav %}{% endblock %}
 
 {% block hero %}
 <style>
 .md-main__inner{margin:0;max-width:none;padding:0;}
 .md-content{max-width:none;margin:0;padding:0;}
 .md-sidebar{display:none;}
+/* Hide the hamburger on the home page — the road signs are the nav */
+label[for="__drawer"]{display:none!important;}
+.md-header__button.md-icon[for="__drawer"]{display:none!important;}
 .md-header{background:rgba(21,5,52,0.9)!important;backdrop-filter:blur(8px);}
 .md-footer{border-top:1px solid rgba(185,103,255,0.15);}
 
@@ -57,13 +59,26 @@
 .sign-yellow .sign-plate{border-color:rgba(255,251,150,.4);color:#fffb96;text-shadow:0 0 8px rgba(255,251,150,.3);}
 .sign-post{width:2px;height:14px;margin:0 auto;background:linear-gradient(180deg,rgba(185,103,255,.3),rgba(185,103,255,.08));}
 
-.road-title{position:absolute;top:1%;left:50%;transform:translateX(-50%);z-index:20;text-align:center;width:92%;max-width:640px;}
-.road-title h1{font-size:2rem;font-weight:700;letter-spacing:.05em;
+.road-title{position:absolute;top:1%;left:50%;transform:translateX(-50%);z-index:20;text-align:center;width:94%;max-width:680px;}
+.road-title h1{font-size:1.9rem;font-weight:700;letter-spacing:.05em;
   background:linear-gradient(90deg,#00f0ff,#ff2d95,#b967ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:heroGlow 4s ease-in-out infinite alternate;margin-bottom:.15rem;line-height:1.2;}
+  animation:heroGlow 4s ease-in-out infinite alternate;margin-bottom:.5rem;line-height:1.2;}
 @keyframes heroGlow{0%{filter:drop-shadow(0 0 12px rgba(0,240,255,.5))}100%{filter:drop-shadow(0 0 20px rgba(255,45,149,.6))}}
-.road-title .intro{font-size:.68rem;color:#8b7fad;letter-spacing:.02em;margin-bottom:.5rem;line-height:1.55;max-width:540px;margin-left:auto;margin-right:auto;}
-.road-title .intro .handle{color:#00f0ff;font-family:'JetBrains Mono',monospace;font-weight:600;}
+/* Terminal window */
+.term{background:rgba(10,2,24,0.92);border:1px solid rgba(185,103,255,0.3);border-radius:8px;
+  box-shadow:0 0 25px rgba(0,240,255,0.08),inset 0 0 30px rgba(185,103,255,0.03);
+  backdrop-filter:blur(6px);overflow:hidden;margin-bottom:.6rem;text-align:left;}
+.term-bar{display:flex;align-items:center;gap:.4rem;padding:.4rem .7rem;background:rgba(30,10,65,0.8);border-bottom:1px solid rgba(185,103,255,0.2);}
+.term-dot{width:10px;height:10px;border-radius:50%;}
+.term-dot.r{background:#ff5f56}.term-dot.y{background:#ffbd2e}.term-dot.g{background:#27c93f}
+.term-title{margin-left:.5rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#8b7fad;letter-spacing:.03em;}
+.term-body{padding:.7rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.66rem;line-height:1.7;color:#c9bdf0;}
+.term-body .prompt{color:#27c93f;}
+.term-body .cmd{color:#00f0ff;}
+.term-body .out{color:#a89cc8;}
+.term-body .handle{color:#ff2d95;font-weight:600;}
+.term-body .cursor{display:inline-block;width:7px;height:13px;background:#00f0ff;animation:blink 1.1s steps(1) infinite;vertical-align:middle;margin-left:2px;}
+@keyframes blink{50%{opacity:0}}
 .enter-btn{display:inline-block;padding:.45rem 1.5rem;border:2px solid #00f0ff;color:#00f0ff!important;border-radius:4px;
   font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   cursor:pointer;transition:all .25s;background:rgba(13,2,33,0.8);text-decoration:none!important;backdrop-filter:blur(4px);}
@@ -88,20 +103,28 @@
 .credits-title{font-size:1.3rem;font-weight:700;text-align:center;
   background:linear-gradient(90deg,#00f0ff,#b967ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
 .credits-sub{text-align:center;color:#8b7fad;font-size:.82rem;margin-bottom:1.5rem;}
-.credits-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.2rem;}
-.credit-card{display:block;background:#1a0a3e;border:1px solid rgba(185,103,255,.12);border-radius:6px;padding:1rem 1.1rem;transition:all .25s;text-decoration:none!important;}
+/* Creator card — full width, on top */
+.creator-card{display:block;max-width:400px;margin:0 auto 1.5rem;background:linear-gradient(135deg,rgba(255,45,149,0.08),rgba(0,240,255,0.06));
+  border:1px solid rgba(0,240,255,.35);border-radius:8px;padding:1rem 1.2rem;text-align:center;transition:all .25s;text-decoration:none!important;
+  box-shadow:0 0 20px rgba(0,240,255,0.08);}
+.creator-card:hover{transform:translateY(-2px);box-shadow:0 0 25px rgba(0,240,255,0.2);}
+.creator-card .cc-name{color:#00f0ff;font-size:1rem;}
+.creator-card .cc-role{color:#ff2d95;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem;}
+.creator-card .cc-handle{margin-bottom:0;}
+/* Compact name boxes */
+.credits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:1.2rem;}
+.credit-card{display:block;background:#1a0a3e;border:1px solid rgba(185,103,255,.12);border-radius:6px;padding:.7rem .8rem;transition:all .25s;text-decoration:none!important;text-align:center;}
 .credit-card:hover{transform:translateY(-2px);}
 .cc-cyan:hover{border-color:rgba(0,240,255,.3);box-shadow:0 0 16px rgba(0,240,255,.08);}
 .cc-pink:hover{border-color:rgba(255,45,149,.3);box-shadow:0 0 16px rgba(255,45,149,.08);}
 .cc-purple:hover{border-color:rgba(185,103,255,.3);box-shadow:0 0 16px rgba(185,103,255,.08);}
 .cc-yellow:hover{border-color:rgba(255,251,150,.25);box-shadow:0 0 16px rgba(255,251,150,.06);}
-.cc-name{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;margin-bottom:.15rem;}
+.cc-name{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;margin-bottom:.12rem;}
 .cc-cyan .cc-name{color:#00f0ff}.cc-pink .cc-name{color:#ff2d95}.cc-purple .cc-name{color:#b967ff}.cc-yellow .cc-name{color:#fffb96}
-.cc-handle{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#8b7fad;margin-bottom:.5rem;}
-.cc-desc{font-size:.78rem;color:#e0d6ff;line-height:1.55;opacity:.85;}
+.cc-handle{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#8b7fad;}
 .credits-communities{text-align:center;font-size:.8rem;color:#8b7fad;margin-top:.5rem;}
 .landing-footer{text-align:center;padding:1rem;font-size:.65rem;color:#8b7fad;opacity:.5;}
-@media(max-width:768px){.road-title h1{font-size:1.2rem}.road-title{top:1%}.road-title .intro{font-size:.6rem;line-height:1.4}.sign-plate{font-size:.5rem;padding:.25rem .5rem}.signs-container{top:55%}.credits-grid{grid-template-columns:1fr}.sign-row.left{padding-right:30%}.sign-row.right{padding-left:30%}.sign-row{margin-bottom:.25rem}.sign-post{height:8px}.social-float{right:.5rem;gap:.4rem}.social-float a{width:30px;height:30px}.social-float a svg{width:14px;height:14px}.social-bar{flex-wrap:wrap;gap:.5rem}.social-bar a{font-size:.65rem;padding:.3rem .5rem}}
+@media(max-width:768px){.road-title h1{font-size:1.1rem}.road-title{top:1%}.term-body{font-size:.55rem;line-height:1.5;padding:.5rem .6rem}.term-title{font-size:.55rem}.sign-plate{font-size:.5rem;padding:.25rem .5rem}.signs-container{top:58%}.credits-grid{grid-template-columns:1fr 1fr}.sign-row.left{padding-right:30%}.sign-row.right{padding-left:30%}.sign-row{margin-bottom:.25rem}.sign-post{height:8px}.social-float{right:.5rem;gap:.4rem}.social-float a{width:30px;height:30px}.social-float a svg{width:14px;height:14px}.social-bar{flex-wrap:wrap;gap:.5rem}.social-bar a{font-size:.65rem;padding:.3rem .5rem}}
 </style>
 
 <div class="outrun-landing">
@@ -129,7 +152,19 @@
 
   <div class="road-title">
     <h1>automotive-cybersec-hub</h1>
-    <div class="intro">Welcome — I'm <span class="handle">7im3Crisys</span>, and I've been in automotive cybersecurity since 2015. I've watched this industry evolve from niche research into a critical discipline, and I've done my best to keep up with the latest tools, research, talks, and trainings along the way. This is the resource I wish existed when I was coming up — a curated learning path to help you gain expertise and find what interests you most. Built with contributions from noteworthy community professionals.</div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+        <span class="term-title">7im3Crisys@carhax: ~/welcome</span>
+      </div>
+      <div class="term-body">
+        <span class="prompt">$</span> <span class="cmd">whoami</span><br>
+        <span class="out">Welcome — I'm <span class="handle">7im3Crisys</span>. I've been in automotive cybersecurity since 2015 and watched this field grow from niche research into a critical discipline.</span><br>
+        <span class="prompt">$</span> <span class="cmd">cat ./mission.txt</span><br>
+        <span class="out">I've done my best to keep up with the latest tools, research, talks, and trainings. This is the resource I wish existed when I was coming up — a curated path to help you gain expertise and find what interests you most.</span><br>
+        <span class="prompt">$</span> <span class="cmd">./start_roadmap.sh</span><span class="cursor"></span>
+      </div>
+    </div>
     <a class="enter-btn" href="roadmap/">Enter the Roadmap →</a>
   </div>
 
@@ -154,42 +189,40 @@
   <div class="credits-inner">
     <div class="credits-title">Built on the shoulders of</div>
     <p class="credits-sub">This resource exists because these people put their knowledge out in the open.</p>
+
+    <a href="https://infosec.exchange/@7im3Crisys" target="_blank" class="creator-card">
+      <div class="cc-role">Creator / Roadmap Designer</div>
+      <div class="cc-name">7im3Crisys</div>
+      <div class="cc-handle">automotive cybersecurity since 2015</div>
+    </a>
+
     <div class="credits-grid">
       <a href="https://icanhack.nl/" target="_blank" class="credit-card cc-cyan">
         <div class="cc-name">Willem Melching</div><div class="cc-handle">icanhack.nl</div>
-        <div class="cc-desc">The Knowledge Base on vehicle networks, diagnostics, and automotive RE. This site links to his work constantly because there's no point rewriting what he's already done better.</div>
       </a>
       <a href="https://voidstarsec.com/" target="_blank" class="credit-card cc-pink">
-        <div class="cc-name">Matthew Alt / Wrong Baud</div><div class="cc-handle">VoidStar Security</div>
-        <div class="cc-desc">The Embedded Security Roadmap and Wrong Baud's Blog are the definitive open resources for hardware hacking. His Ghidra training through Hackaday U has taught thousands.</div>
+        <div class="cc-name">Matthew Alt</div><div class="cc-handle">VoidStar / Wrong Baud</div>
       </a>
       <a href="https://github.com/polybassa" target="_blank" class="credit-card cc-purple">
         <div class="cc-name">Nils Weiss</div><div class="cc-handle">Scapy Automotive</div>
-        <div class="cc-desc">Built the Scapy automotive layer — UDS, DoIP, ISO-TP, SOME/IP, HSFZ, GMLAN, XCP plus automated scanners and stateful fuzzers.</div>
       </a>
       <a href="https://ost2.fyi/" target="_blank" class="credit-card cc-cyan">
         <div class="cc-name">Xeno Kovah</div><div class="cc-handle">OpenSecurityTraining2</div>
-        <div class="cc-desc">Founded OST2 — a nonprofit providing the world's deepest free cybersecurity training. Architecture courses are essential for embedded RE at depth.</div>
       </a>
       <a href="https://www.newae.com/" target="_blank" class="credit-card cc-yellow">
         <div class="cc-name">Colin O'Flynn</div><div class="cc-handle">ChipWhisperer</div>
-        <div class="cc-desc">Created ChipWhisperer, making side-channel analysis and fault injection accessible. BAM BAM!! demonstrated EMFI on a real automotive ECU.</div>
       </a>
       <a href="https://github.com/FlUxIuS" target="_blank" class="credit-card cc-pink">
-        <div class="cc-name">Sébastien Dudek</div><div class="cc-handle">V2G Injector / HomePlugPWN</div>
-        <div class="cc-desc">Opened up EV charging security as a research field with PLC-layer MITM on ISO 15118.</div>
+        <div class="cc-name">Sébastien Dudek</div><div class="cc-handle">V2G Injector</div>
       </a>
       <a href="http://opengarages.org/" target="_blank" class="credit-card cc-purple">
-        <div class="cc-name">Craig Smith</div><div class="cc-handle">Car Hacker's Handbook / ICSim</div>
-        <div class="cc-desc">The first book most people read on automotive security. ICSim is where almost everyone's CAN bus journey starts.</div>
+        <div class="cc-name">Craig Smith</div><div class="cc-handle">Car Hacker's Handbook</div>
       </a>
       <a href="https://samy.pl/" target="_blank" class="credit-card cc-yellow">
         <div class="cc-name">Samy Kamkar</div><div class="cc-handle">RollJam / OpenSesame</div>
-        <div class="cc-desc">Demonstrated real-world key fob and rolling code vulnerabilities that changed how the industry thinks about physical access.</div>
       </a>
       <a href="https://brownfinesecurity.com/" target="_blank" class="credit-card cc-cyan">
-        <div class="cc-name">Matt Brown</div><div class="cc-handle">Brown Fine Security / @mattbrwn</div>
-        <div class="cc-desc">200K+ subscriber YouTube channel — the largest active hardware hacking channel. IoT pentesting walkthroughs, firmware RE, UART exploitation, and free training that bridges software pentesting to hardware.</div>
+        <div class="cc-name">Matt Brown</div><div class="cc-handle">Brown Fine Security</div>
       </a>
     </div>
     <p class="credits-communities">And the communities: <a href="http://opengarages.org/" target="_blank">Open Garages</a> · <a href="https://www.carhackingvillage.com/" target="_blank">DEF CON Car Hacking Village</a> · <a href="https://www.asrg.io/" target="_blank">ASRG</a></p>
