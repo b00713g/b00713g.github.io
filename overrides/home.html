@@ -19,14 +19,14 @@ label[for="__drawer"]{display:none!important;}
 .stars{position:absolute;top:0;left:0;right:0;height:45%;pointer-events:none;}
 .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s ease-in-out infinite alternate;}
 @keyframes twinkle{0%{opacity:.2}100%{opacity:.9}}
-.outrun-sun{position:absolute;left:50%;transform:translateX(-50%);top:26%;width:240px;height:120px;border-radius:120px 120px 0 0;
+.outrun-sun{position:absolute;left:50%;transform:translateX(-50%);top:34%;width:220px;height:110px;border-radius:110px 110px 0 0;
   background:linear-gradient(180deg,#ff2d95 0%,#ff6b35 35%,#fffb96 85%);opacity:.6;animation:sunBreathe 5s ease-in-out infinite;}
 .outrun-sun::after{content:'';position:absolute;inset:0;border-radius:inherit;
   background:repeating-linear-gradient(0deg,transparent,transparent 5px,rgba(13,2,33,.55) 5px,rgba(13,2,33,.55) 10px);}
 @keyframes sunBreathe{0%,100%{opacity:.5;transform:translateX(-50%) scale(1)}50%{opacity:.7;transform:translateX(-50%) scale(1.03)}}
-.mountains{position:absolute;top:42%;left:0;right:0;height:80px;pointer-events:none;}
+.mountains{position:absolute;top:50%;left:0;right:0;height:70px;pointer-events:none;}
 .mountains svg{width:100%;height:100%;}
-.road-scene{position:absolute;top:48%;left:0;right:0;bottom:0;perspective:380px;overflow:hidden;}
+.road-scene{position:absolute;top:56%;left:0;right:0;bottom:0;perspective:380px;overflow:hidden;}
 .road-surface{position:absolute;inset:0;background:linear-gradient(180deg,#1a0033,#0d001a);transform:rotateX(52deg);transform-origin:top center;}
 .road-surface::before{content:'';position:absolute;inset:0;
   background:linear-gradient(rgba(185,103,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(185,103,255,.08) 1px,transparent 1px);
@@ -40,7 +40,7 @@ label[for="__drawer"]{display:none!important;}
   opacity:.6;animation:dashFlow .8s linear infinite;}
 @keyframes dashFlow{0%{background-position:0 0}100%{background-position:0 40px}}
 
-.signs-container{position:absolute;top:58%;left:0;right:0;bottom:1%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;pointer-events:none;padding-bottom:.5rem;}
+.signs-container{position:absolute;top:66%;left:0;right:0;bottom:1%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;pointer-events:none;padding-bottom:.5rem;}
 .sign-row{display:flex;justify-content:center;width:100%;pointer-events:auto;margin-bottom:.35rem;}
 .sign-row.left{padding-right:38%;}
 .sign-row.right{padding-left:38%;}
@@ -72,7 +72,7 @@ label[for="__drawer"]{display:none!important;}
 .term-dot{width:10px;height:10px;border-radius:50%;}
 .term-dot.r{background:#ff5f56}.term-dot.y{background:#ffbd2e}.term-dot.g{background:#27c93f}
 .term-title{margin-left:.5rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#8b7fad;letter-spacing:.03em;}
-.term-body{padding:.7rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.66rem;line-height:1.7;color:#c9bdf0;}
+.term-body{padding:.6rem .8rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;line-height:1.55;color:#c9bdf0;}
 .term-body .prompt{color:#27c93f;}
 .term-body .cmd{color:#00f0ff;}
 .term-body .out{color:#a89cc8;}
@@ -124,7 +124,7 @@ label[for="__drawer"]{display:none!important;}
 .cc-handle{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#8b7fad;}
 .credits-communities{text-align:center;font-size:.8rem;color:#8b7fad;margin-top:.5rem;}
 .landing-footer{text-align:center;padding:1rem;font-size:.65rem;color:#8b7fad;opacity:.5;}
-@media(max-width:768px){.road-title h1{font-size:1.1rem}.road-title{top:1%}.term-body{font-size:.55rem;line-height:1.5;padding:.5rem .6rem}.term-title{font-size:.55rem}.sign-plate{font-size:.5rem;padding:.25rem .5rem}.signs-container{top:58%}.credits-grid{grid-template-columns:1fr 1fr}.sign-row.left{padding-right:30%}.sign-row.right{padding-left:30%}.sign-row{margin-bottom:.25rem}.sign-post{height:8px}.social-float{right:.5rem;gap:.4rem}.social-float a{width:30px;height:30px}.social-float a svg{width:14px;height:14px}.social-bar{flex-wrap:wrap;gap:.5rem}.social-bar a{font-size:.65rem;padding:.3rem .5rem}}
+@media(max-width:768px){.road-title h1{font-size:1.1rem}.road-title{top:1%}.term-body{font-size:.55rem;line-height:1.5;padding:.5rem .6rem}.term-title{font-size:.55rem}.sign-plate{font-size:.5rem;padding:.25rem .5rem}.signs-container{top:64%}.credits-grid{grid-template-columns:1fr 1fr}.sign-row.left{padding-right:30%}.sign-row.right{padding-left:30%}.sign-row{margin-bottom:.25rem}.sign-post{height:8px}.social-float{right:.5rem;gap:.4rem}.social-float a{width:30px;height:30px}.social-float a svg{width:14px;height:14px}.social-bar{flex-wrap:wrap;gap:.5rem}.social-bar a{font-size:.65rem;padding:.3rem .5rem}}
 </style>
 
 <div class="outrun-landing">
